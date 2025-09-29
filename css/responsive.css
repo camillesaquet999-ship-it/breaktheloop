@@ -1,0 +1,162 @@
+/* Styles responsifs pour le site (sauf menu mobile géré dans menu.css) */
+
+/* Tablettes et petits écrans */
+@media (max-width: 992px) {
+    .solutions-grid {
+        grid-template-columns: 1fr;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        padding: 0 10px;
+    }
+    
+    .section-header h2 {
+        font-size: 2.2em;
+    }
+    
+    .section-subtitle {
+        font-size: 1.1em;
+    }
+    
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .hero-text {
+        max-width: 100%;
+        margin-bottom: 40px;
+        text-align: center;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    .hero-text h1 {
+        font-size: 4em;
+    }
+    
+    .hero-text p {
+        font-size: 1.2em;
+    }
+    
+    .hero-image-container {
+        width: 80%;
+        height: 350px;
+    }
+}
+
+/* Smartphones */
+@media (max-width: 768px) {
+    body, html {
+        overflow-x: hidden;
+        width: 100%;
+        position: relative;
+    }
+    
+    .container {
+        padding: 0 10px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+    
+    /* Styles spécifiques pour les cartes de solution */
+    .solutions-section {
+        padding: 50px 0;
+        width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+    
+    .solutions-grid {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        padding: 0 10px;
+    }
+    
+    .solution-card {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        padding: 20px 15px;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    .solution-card ul li {
+        padding-left: 15px;
+    }
+    
+    .solution-card p,
+    .solution-card ul li {
+        font-size: 0.92em;
+        line-height: 1.55;
+    }
+    
+    .solution-card h3 {
+        font-size: 1.5em;
+    }
+    
+    .solution-intro {
+        font-size: 1em;
+    }
+    
+    /* Styles pour le conteneur CTA (Call-to-Action) */
+    .cta-container {
+        padding: 25px 15px;
+        margin-top: 30px;
+        width: 100%;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-text {
+        font-size: 1.2em;
+        margin-bottom: 15px;
+        text-align: center;
+        width: 100%;
+    }
+    
+    .cta-button {
+        width: 90%;
+        max-width: 320px;
+        margin: 0 auto;
+        text-align: center;
+        white-space: normal;
+    }
+    
+    .hero-text h1 {
+        font-size: 3.4em;
+    }
+    
+    .hero-text p {
+        font-size: 1.1em;
+    }
+}
+
+/* Très petits écrans */
+@media (max-width: 480px) {
+    .solution-card {
+        padding: 15px 10px;
+    }
+    
+    .hero-text h1 {
+        font-size: 2.8em;
+    }
+    
+    .hero-text p {
+        font-size: 1em;
+    }
+    
+    .section-header h2 {
+        font-size: 1.8em;
+    }
+    
+    .section-subtitle {
+        font-size: 0.95em;
+    }
+}

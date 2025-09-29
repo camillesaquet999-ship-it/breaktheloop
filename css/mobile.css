@@ -1,0 +1,341 @@
+/* ======== mobile.css ======== */
+/* Styles pour les appareils mobiles et tablettes */
+
+/* Styles généraux pour mobile */
+@media (max-width: 1200px) {
+    .hero-text h1 {
+        font-size: 5em;
+    }
+    .hero-text p {
+        font-size: 1.3em;
+    }
+    .hero-image-container {
+        height: 400px;
+    }
+    
+    .wave-container {
+        height: 80px; /* Smaller height on medium screens */
+    }
+}
+
+/* Tablettes et petits écrans */
+@media (max-width: 992px) {
+    .solutions-grid {
+        grid-template-columns: 1fr;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        padding: 0 10px;
+    }
+    
+    .section-header h2 {
+        font-size: 2.2em;
+    }
+    
+    .section-subtitle {
+        font-size: 1.1em;
+    }
+    
+    .hero-content {
+        flex-direction: column;
+        text-align: center; /* Center text when stacked */
+    }
+    
+    .hero-text {
+        max-width: 100%;
+        margin-bottom: 40px;
+        text-align: center; /* Centrer le texte */
+        margin-left: 0; /* Supprimer la marge latérale pour mobile */
+        margin-right: 0; /* Supprimer la marge latérale pour mobile */
+    }
+    
+    .hero-text h1 {
+        font-size: 4em;
+    }
+    
+    .hero-text p {
+        font-size: 1.2em;
+    }
+    
+    .hero-image-container {
+        width: 80%; /* Make image container wider */
+        height: 350px;
+    }
+    
+    .nav-links {
+        gap: 20px;
+    }
+    
+    .nav-links a {
+        font-size: 0.9em;
+    }
+    
+    .logo {
+        font-size: 1.5em;
+    }
+}
+
+/* Smartphones */
+@media (max-width: 768px) {
+    body, html {
+        overflow-x: hidden;
+    }
+    
+    .container {
+        padding: 0 10px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+    
+    header {
+        padding: 15px 20px; /* Ajusté pour le bouton hamburger */
+    }
+    
+    nav {
+        flex-direction: row; /* Rétablir en ligne pour logo et bouton hamburger */
+        justify-content: space-between; /* Aligner logo à gauche, bouton à droite */
+        align-items: center;
+        gap: 15px;
+    }
+
+    .mobile-nav-toggle {
+        display: block;
+        position: relative;
+        z-index: 999;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        width: 40px;
+        height: 40px;
+    }
+    
+    /* Style des lignes du hamburger */
+    .hamburger-line {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: #FFFFFF;
+        margin: 5px 0;
+        border-radius: 3px;
+        transition: all 0.3s ease;
+    }
+    
+    /* Animation du hamburger quand le menu est ouvert */
+    .mobile-nav-toggle[aria-expanded="true"] .line1 {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .mobile-nav-toggle[aria-expanded="true"] .line2 {
+        opacity: 0;
+    }
+    
+    .mobile-nav-toggle[aria-expanded="true"] .line3 {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+
+    /* Styles simplifiés pour le menu mobile */
+    .nav-links {
+        display: none; /* Caché par défaut */
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 80%;
+        max-width: 300px;
+        background-color: #0A0E2F;
+        padding: 80px 20px 20px;
+        z-index: 997;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+    }
+    
+    /* Quand le menu est actif, on l'affiche */
+    .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    /* Overlay sombre quand le menu est ouvert */
+    .menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease;
+        z-index: 996;
+    }
+    
+    /* Supprimé - déjà géré par le nouveau style simplié */
+    
+    /* Styles simplifiés pour les éléments du menu */
+    .nav-links li {
+        list-style: none;
+        margin: 10px 0;
+        text-align: center;
+        width: 100%;
+    }
+    
+    /* Afficher l'overlay quand le menu est actif */
+    .menu-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .nav-links a {
+        font-size: 1.3em; /* Taille de police plus grande pour meilleure visibilité */
+        color: #ffffff; 
+        text-decoration: none;
+        padding: 10px 15px;
+        display: block;
+        width: 100%;
+        text-align: center;
+        transition: all 0.3s ease;
+        position: relative;
+        font-weight: 500;
+    }
+    
+    .nav-links a:hover {
+        color: #82DBFF;
+        transform: translateX(5px);
+    }
+    
+    .nav-links a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 5px;
+        left: 50%;
+        background: linear-gradient(90deg, #6A0DAD 0%, #82DBFF 100%);
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+    }
+    
+    .nav-links a:hover::after {
+        width: 50%;
+    }
+
+    /* On supprime toutes les références à data-visible qui causent des conflits */
+
+    .solutions-section {
+        padding: 50px 0;
+        width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+    
+    .section-header {
+        margin-bottom: 30px;
+    }
+    
+    .solution-card {
+        padding: 20px 15px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    .solution-card ul li {
+        padding-left: 15px; /* Réduire le padding pour éviter le débordement */
+    }
+    
+    .solution-card p,
+    .solution-card ul li {
+        font-size: 0.92em; /* Légère réduction de la police pour mobile */
+        line-height: 1.55;
+    }
+    
+    .solution-card h3 {
+        font-size: 1.5em;
+    }
+    
+    .solution-intro {
+        font-size: 1em;
+    }
+    
+    /* Styles pour le conteneur CTA (Call-to-Action) */
+    .cta-container {
+        padding: 25px 15px;
+        margin-top: 30px;
+        width: 100%;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-text {
+        font-size: 1.2em;
+        margin-bottom: 15px;
+        text-align: center;
+        width: 100%;
+    }
+    
+    .cta-button {
+        width: 90%;
+        max-width: 320px;
+        margin: 0 auto;
+        text-align: center;
+        white-space: normal; /* Permet au texte de passer à la ligne si nécessaire */
+    }
+    
+    .hero-text h1 {
+        font-size: 3.4em; /* Légèrement réduit pour éviter le dépassement */
+    }
+    
+    .hero-text p {
+        font-size: 1.1em;
+    }
+    
+    .cta-button {
+        padding: 15px 30px;
+        font-size: 1em;
+    }
+    
+    .hero-image-container {
+        height: 300px;
+        width: 90%;
+    }
+}
+
+/* Très petits écrans */
+@media (max-width: 480px) {
+    .hero-text h1 {
+        font-size: 2.8em; /* Légèrement réduit pour éviter le dépassement */
+    }
+    
+    .hero-text p {
+        font-size: 1em;
+    }
+    
+    .nav-links {
+        gap: 15px;
+    }
+    
+    .nav-links a {
+        font-size: 0.8em;
+    }
+    
+    .solution-card {
+        padding: 15px 10px;
+    }
+    
+    .section-header h2 {
+        font-size: 1.8em;
+    }
+    
+    .section-subtitle {
+        font-size: 0.95em;
+    }
+}

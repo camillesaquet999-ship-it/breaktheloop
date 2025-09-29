@@ -1,0 +1,113 @@
+/* ======== actualites.css ======== */
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #0a0a1a;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+main.article-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 100px 20px 60px;
+  animation: fadeInUp 1.2s ease-out;
+}
+
+article {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(130, 219, 255, 0.1);
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0 8px 24px rgba(130, 219, 255, 0.05);
+  transition: transform 0.3s ease;
+}
+
+article:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(130, 219, 255, 0.12);
+}
+
+article h2 {
+  font-size: 2.6em;
+  background: linear-gradient(90deg, #ffffff 0%, #82DBFF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 30px;
+}
+
+article h3 {
+  font-size: 1.6em;
+  color: #82DBFF;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+article p {
+  font-size: 1.05em;
+  line-height: 1.8;
+  color: #dddddd;
+  margin-bottom: 20px;
+}
+
+article ul {
+  padding-left: 20px;
+  margin-bottom: 30px;
+}
+
+article ul li {
+  margin-bottom: 10px;
+  position: relative;
+  padding-left: 15px;
+  font-size: 1.05em;
+}
+
+article ul li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #82DBFF;
+}
+
+article a {
+  color: #82DBFF;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+article a:hover {
+  color: #6A0DAD;
+  text-decoration: underline;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  main.article-wrapper {
+    padding: 60px 15px 40px;
+  }
+
+  article h2 {
+    font-size: 2em;
+  }
+
+  article h3 {
+    font-size: 1.3em;
+  }
+
+  article p,
+  article ul li {
+    font-size: 0.95em;
+  }
+}
