@@ -1,273 +1,385 @@
-const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
-
-function initHeroScene() {
-  const canvas = document.getElementById('hero-canvas');
-  if (!canvas || typeof THREE === 'undefined') {
-    return;
-  }
-
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
-  renderer.outputColorSpace = THREE.SRGBColorSpace;
-
-  const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x050818, 0.045);
-
-  const camera = new THREE.PerspectiveCamera(60, canvas.clientWidth / canvas.clientHeight, 0.1, 220);
-  camera.position.set(0, 6, 16);
-
-  const ambient = new THREE.AmbientLight(0x7c5cff, 0.45);
-  scene.add(ambient);
-
-  const directional = new THREE.DirectionalLight(0x4cf3ff, 1.1);
-  directional.position.set(5, 12, 8);
-  scene.add(directional);
-
-  const city = new THREE.Group();
-  const blockGeometry = new THREE.BoxGeometry(1, 1, 1);
-
-  for (let i = 0; i < 240; i += 1) {
-    const height = Math.random() * 10 + 2;
-    const width = Math.random() * 1.8 + 0.4;
-    const depth = Math.random() * 1.8 + 0.4;
-    const material = new THREE.MeshStandardMaterial({
-      color: new THREE.Color().setHSL(0.62 + Math.random() * 0.05, 0.55, 0.45),
-      emissive: 0x091133,
-      metalness: 0.75,
-      roughness: 0.35,
+// Configuration des particules
+function initParticles() {
+    particlesJS('particles-js', {
+        particles: {
+            number: {
+                value: 80,
+                density: {
+                    enable: true,
+                    value_area: 800
+                }
+            },
+            color: {
+                value: '#ffffff'
+            },
+            shape: {
+                type: 'circle',
+                stroke: {
+                    width: 0,
+                    color: '#000000'
+                },
+                polygon: {
+                    nb_sides: 5
+                }
+            },
+            opacity: {
+                value: 0.3,
+                random: false,
+                anim: {
+                    enable: false,
+                    speed: 1,
+                    opacity_min: 0.1,
+                    sync: false
+                }
+            },
+            size: {
+                value: 3,
+                random: true,
+                anim: {
+                    enable: false,
+                    speed: 40,
+                    size_min: 0.1,
+                    sync: false
+                }
+            },
+            line_linked: {
+                enable: true,
+                distance: 150,
+                color: '#82DBFF',
+                opacity: 0.2,
+                width: 1
+            },
+            move: {
+                enable: true,
+                speed: 2,
+                direction: 'none',
+                random: false,
+                straight: false,
+                out_mode: 'out',
+                bounce: false,
+                attract: {
+                    enable: false,
+                    rotateX: 600,
+                    rotateY: 1200
+                }
+            }
+        },
+        interactivity: {
+            detect_on: 'canvas',
+            events: {
+                onhover: {
+                    enable: true,
+                    mode: 'grab'
+                },
+                onclick: {
+                    enable: true,
+                    mode: 'push'
+                },
+                resize: true
+            },
+            modes: {
+                grab: {
+                    distance: 140,
+                    line_linked: {
+                        opacity: 0.6
+                    }
+                },
+                bubble: {
+                    distance: 400,
+                    size: 40,
+                    duration: 2,
+                    opacity: 8,
+                    speed: 3
+                },
+                repulse: {
+                    distance: 200,
+                    duration: 0.4
+                },
+                push: {
+                    particles_nb: 4
+                },
+                remove: {
+                    particles_nb: 2
+                }
+            }
+        },
+        retina_detect: true
     });
+}
 
-    const block = new THREE.Mesh(blockGeometry, material);
-    block.scale.set(width, height, depth);
-    block.position.set((Math.random() - 0.5) * 40, height / 2 - 2, -Math.random() * 90 - 10);
-    block.castShadow = false;
-    block.receiveShadow = false;
-    city.add(block);
-  }
-
-  scene.add(city);
-
-  const roadGeometry = new THREE.PlaneGeometry(9, 220);
-  const roadMaterial = new THREE.MeshStandardMaterial({
-    color: 0x050a1a,
-    emissive: 0x0a1330,
-    metalness: 0.9,
-    roughness: 0.15,
-    transparent: true,
-    opacity: 0.85,
-  });
-  const road = new THREE.Mesh(roadGeometry, roadMaterial);
-  road.rotation.x = -Math.PI / 2;
-  road.position.set(0, -2, -80);
-  scene.add(road);
-
-  const laneGeometry = new THREE.PlaneGeometry(0.18, 220);
-  const laneMaterial = new THREE.MeshBasicMaterial({ color: 0x7c5cff, transparent: true, opacity: 0.65 });
-  const laneLeft = new THREE.Mesh(laneGeometry, laneMaterial);
-  laneLeft.rotation.x = -Math.PI / 2;
-  laneLeft.position.set(-1.2, -1.99, -80);
-  scene.add(laneLeft);
-  const laneRight = laneLeft.clone();
-  laneRight.position.x = 1.2;
-  scene.add(laneRight);
-
-  const stars = new THREE.BufferGeometry();
-  const starCount = 400;
-  const positions = new Float32Array(starCount * 3);
-  for (let i = 0; i < starCount; i += 1) {
-    positions[i * 3] = (Math.random() - 0.5) * 80;
-    positions[i * 3 + 1] = Math.random() * 40 + 5;
-    positions[i * 3 + 2] = -Math.random() * 180;
-  }
-  stars.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-  const starMaterial = new THREE.PointsMaterial({ color: 0x4cf3ff, size: 0.12, transparent: true, opacity: 0.65 });
-  const starField = new THREE.Points(stars, starMaterial);
-  scene.add(starField);
-
-  const targetPosition = new THREE.Vector3(camera.position.x, camera.position.y, camera.position.z);
-  const lookTarget = new THREE.Vector3(0, 0, -40);
-  const clock = new THREE.Clock();
-  const speed = 12;
-
-  function handlePointerMove(event) {
-    const x = (event.clientX / window.innerWidth) * 2 - 1;
-    const y = (event.clientY / window.innerHeight) * 2 - 1;
-    targetPosition.x = clamp(x * 3.2, -4, 4);
-    targetPosition.y = clamp(6 - y * 2.2, 3, 8.5);
-  }
-
-  window.addEventListener('pointermove', handlePointerMove);
-
-  function resizeRenderer() {
-    const { clientWidth, clientHeight } = canvas;
-    if (canvas.width !== clientWidth || canvas.height !== clientHeight) {
-      renderer.setSize(clientWidth, clientHeight, false);
-      camera.aspect = clientWidth / clientHeight;
-      camera.updateProjectionMatrix();
+// Gestion du défilement pour le header sticky et la disparition des vagues
+function handleScroll() {
+    const header = document.querySelector('header');
+    const waveWrapper = document.getElementById('wave-wrapper');
+    const scrollPosition = window.scrollY;
+    
+    // Changer le style du header lors du défilement
+    if (header) { // Ajout d'une vérification au cas où header n'existe pas
+        if (scrollPosition > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
     }
-  }
-
-  function animate() {
-    requestAnimationFrame(animate);
-
-    resizeRenderer();
-    const delta = clamp(clock.getDelta(), 0.016, 0.08);
-
-    city.children.forEach((block) => {
-      block.position.z += delta * speed;
-      if (block.position.z > 10) {
-        block.position.z = -100 - Math.random() * 60;
-        block.position.x = (Math.random() - 0.5) * 40;
-      }
-    });
-
-    [road, laneLeft, laneRight, starField].forEach((mesh) => {
-      mesh.position.z += delta * speed;
-      if (mesh.position.z > 20) {
-        mesh.position.z = -180;
-      }
-    });
-
-    camera.position.lerp(targetPosition, 0.08);
-    camera.lookAt(lookTarget);
-
-    renderer.render(scene, camera);
-  }
-
-  animate();
-}
-
-function initRevealAnimations() {
-  const revealElements = document.querySelectorAll('[data-reveal]');
-  if (!revealElements.length) {
-    return;
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.2,
-    rootMargin: '0px 0px -10% 0px',
-  });
-
-  revealElements.forEach((el) => observer.observe(el));
-}
-
-function initParallax() {
-  const parallaxItems = document.querySelectorAll('[data-parallax-target]');
-  if (!parallaxItems.length) {
-    return;
-  }
-
-  let ticking = false;
-
-  const update = () => {
-    parallaxItems.forEach((item) => {
-      const parent = item.closest('[data-parallax]');
-      if (!parent) {
-        return;
-      }
-      const rect = parent.getBoundingClientRect();
-      const depth = parseFloat(parent.dataset.parallax || '0.18');
-      const offset = (rect.top + rect.height / 2 - window.innerHeight / 2) * depth;
-      item.style.transform = `translate3d(0, ${-offset}px, 0)`;
-    });
-    ticking = false;
-  };
-
-  const requestUpdate = () => {
-    if (!ticking) {
-      ticking = true;
-      requestAnimationFrame(update);
+    
+    // Faire disparaître les vagues en fondu lors du défilement
+    if (waveWrapper) { // Ajout d'une vérification
+        if (scrollPosition > 50) { // Ajustement du seuil de disparition
+            if (!waveWrapper.classList.contains('hidden')) {
+                waveWrapper.classList.add('hidden');
+            }
+        } else {
+            if (waveWrapper.classList.contains('hidden')) {
+                waveWrapper.classList.remove('hidden');
+            }
+        }
     }
-  };
-
-  window.addEventListener('scroll', requestUpdate, { passive: true });
-  window.addEventListener('resize', requestUpdate);
-  requestUpdate();
-}
-
-function initCursorGlow() {
-  const glow = document.querySelector('.cursor-glow');
-  if (!glow) {
-    return;
-  }
-
-  let activePointer = false;
-
-  const updatePosition = (x, y) => {
-    glow.style.opacity = '1';
-    glow.style.left = `${x}px`;
-    glow.style.top = `${y}px`;
-  };
-
-  window.addEventListener('pointermove', (event) => {
-    activePointer = true;
-    updatePosition(event.clientX, event.clientY);
-  });
-
-  window.addEventListener('pointerdown', (event) => {
-    updatePosition(event.clientX, event.clientY);
-  });
-
-  window.addEventListener('pointerleave', () => {
-    if (activePointer) {
-      glow.style.opacity = '0';
-    }
-  });
-}
-
-function initHeaderScroll() {
-  const header = document.querySelector('.site-header');
-  if (!header) {
-    return;
-  }
-
-  const handleScroll = () => {
-    header.classList.toggle('scrolled', window.scrollY > 80);
-  };
-
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  handleScroll();
-}
-
-function initCurrentYear() {
-  const yearElements = document.querySelectorAll('#current-year');
-  if (!yearElements.length) {
-    return;
-  }
-  const currentYear = new Date().getFullYear();
-  yearElements.forEach((element) => {
-    element.textContent = String(currentYear);
-  });
-}
-
-function initVanillaTilt() {
-  if (typeof VanillaTilt === 'undefined') {
-    return;
-  }
-  const tiltNodes = document.querySelectorAll('[data-tilt]');
-  if (!tiltNodes.length) {
-    return;
-  }
-  VanillaTilt.init(tiltNodes, {
-    glare: true,
-    'max-glare': 0.35,
-  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  initHeroScene();
-  initRevealAnimations();
-  initParallax();
-  initCursorGlow();
-  initHeaderScroll();
-  initCurrentYear();
-  initVanillaTilt();
+    // Code du menu mobile déplacé vers mobile-menu.js
+    // Pour éviter les conflits et assurer un fonctionnement fiable
+
+    // Initialiser les particules
+    if (typeof particlesJS === 'function') { // Vérifie si particlesJS est chargé
+        initParticles();
+    } else {
+        console.error('particlesJS not found, skipping initialization.');
+    }
+
+    // Gestion du défilement
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Appel initial pour définir l'état correct au chargement
+
+    // Ajouter un écouteur d'événement pour la flèche de défilement
+    const scrollIndicator = document.querySelector('.scroll-indicator'); // Nom original rétabli
+    if (scrollIndicator) {
+        scrollIndicator.addEventListener('click', () => {
+            const solutionsSection = document.getElementById('solutions');
+            if (solutionsSection) {
+                solutionsSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    }
+    
+    // Code existant pour le modèle 3D
+    const canvas = document.getElementById('ringCanvas');
+    let scene, camera, renderer, model; // Déclarations pour Three.js
+    let ambientLight, directionalLight;
+    let lastMouseX = 0, lastMouseY = 0; // Renamed to avoid confusion, stores last position
+    let targetRotationX = 0, targetRotationY = 0;
+    let windowHalfX = window.innerWidth / 2;
+    let windowHalfY = window.innerHeight / 2;
+    let isDragging = false;
+
+    function init() {
+        // Scene
+        scene = new THREE.Scene();
+
+        // Camera
+        const aspectRatio = canvas.offsetWidth / canvas.offsetHeight;
+        camera = new THREE.PerspectiveCamera(45, aspectRatio, 0.1, 1000);
+        camera.position.set(0, 0, 9); // Moved camera back to accommodate larger model
+        camera.lookAt(scene.position);
+
+        // Renderer
+        renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+        renderer.setSize(canvas.offsetWidth, canvas.offsetHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.outputEncoding = THREE.sRGBEncoding; // For GLTF models
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.0;
+        
+        // Ajout des écouteurs d'événements pour l'interaction avec la souris/doigt
+        canvas.addEventListener('mousedown', onDocumentMouseDown, false);
+        canvas.addEventListener('touchstart', onDocumentTouchStart, false);
+        canvas.addEventListener('mousemove', onDocumentMouseMove, false);
+        canvas.addEventListener('touchmove', onDocumentTouchMove, false);
+        canvas.addEventListener('mouseup', onDocumentMouseUp, false);
+        canvas.addEventListener('touchend', onDocumentTouchEnd, false);
+
+        // Lighting
+        ambientLight = new THREE.AmbientLight(0x404040, 2); // Soft white light
+        scene.add(ambientLight);
+
+        directionalLight = new THREE.DirectionalLight(0x82DBFF, 2.5); // Light blueish light
+        directionalLight.position.set(5, 5, 5).normalize();
+        scene.add(directionalLight);
+        
+        const backLight = new THREE.DirectionalLight(0x6A0DAD, 1.5); // Purpleish backlight
+        backLight.position.set(-5, -3, -5).normalize();
+        scene.add(backLight);
+
+
+        // GLTF Loader
+        const loader = new THREE.GLTFLoader();
+        loader.load(
+            'assets/ring.glb', // Ensure this path is correct
+            function (gltf) {
+                model = gltf.scene;
+                model.scale.set(3.5, 3.5, 3.5); // Increased scale significantly
+                model.position.set(0, 0, 0); // Center the model
+
+                // Optional: Apply a more metallic/shiny look if not defined in GLB
+                model.traverse((child) => {
+                    if (child.isMesh) {
+                        // Ensure a material exists
+                        if (!child.material) {
+                            child.material = new THREE.MeshStandardMaterial({ color: 0x5555ff });
+                        } else if (child.material.isMeshStandardMaterial) {
+                            child.material.metalness = 0.8; // Increase metalness
+                            child.material.roughness = 0.3; // Decrease roughness for shinier surface
+                        }
+                         // If you want to force a specific color similar to the image:
+                        // child.material.color.setHex(0x3c65d8); // Blueish
+                        // child.material.emissive = new THREE.Color(0x6A0DAD).multiplyScalar(0.2); // Purple glow
+                    }
+                });
+
+                scene.add(model);
+                animate(); // Start animation loop only after model is loaded
+            },
+            function (error) {
+                console.error('An error happened loading the GLTF model:', error);
+                // Display a fallback or error message on the canvas
+                const ctx = canvas.getContext('2d');
+                if (ctx) {
+                    ctx.fillStyle = 'red';
+                    ctx.font = '16px Poppins';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('Erreur: Modèle 3D (ring.glb) introuvable ou non chargé.', canvas.offsetWidth / 2, canvas.offsetHeight / 2);
+                    ctx.fillText('Vérifiez le chemin et le fichier dans assets/.', canvas.offsetWidth / 2, canvas.offsetHeight / 2 + 20);
+                }
+            }
+        );
+
+        // Handle window resize
+        window.addEventListener('resize', onWindowResize, false);
+    }
+
+    function onWindowResize() {
+        if (camera && renderer && canvas) {
+            const heroImageContainer = document.querySelector('.hero-image-container');
+            if (heroImageContainer) {
+                 // Set canvas size based on its container - make it larger
+                canvas.width = heroImageContainer.offsetWidth * 1.2;
+                canvas.height = heroImageContainer.offsetHeight * 1.2;
+                
+                camera.aspect = canvas.width / canvas.height;
+                camera.updateProjectionMatrix();
+                renderer.setSize(canvas.width, canvas.height);
+                
+                // Mettre à jour les variables utilisées pour le calcul de la rotation
+                windowHalfX = window.innerWidth / 2;
+                windowHalfY = window.innerHeight / 2;
+            }
+        }
+    }
+    
+    // Call onWindowResize initially to set correct size
+    setTimeout(onWindowResize, 50); // Small delay to ensure layout is stable
+
+
+    function animate() {
+        requestAnimationFrame(animate);
+
+        if (model) {
+            if (!isDragging) {
+                // Animation automatique lente quand pas d'interaction
+                // Continue d'utiliser targetRotationX/Y ou une rotation incrémentielle simple
+                model.rotation.y += 0.003; // Ou ajustez pour utiliser targetRotationY si vous préférez une dérive vers une cible
+                model.rotation.x += 0.001; // Ou ajustez pour utiliser targetRotationX
+            }
+            // La rotation pendant le glissement est gérée directement dans les événements mousemove/touchmove
+        }
+
+        renderer.render(scene, camera);
+    }
+    
+    // Fonctions pour gérer les interactions souris/tactile
+    function onDocumentMouseDown(event) {
+        event.preventDefault();
+        isDragging = true;
+        
+        lastMouseX = event.clientX;
+        lastMouseY = event.clientY;
+        // Pas besoin de définir targetRotationX/Y ici, l'animation idle s'en chargera
+    }
+    
+    function onDocumentMouseMove(event) {
+        if (isDragging && model) {
+            const deltaX = event.clientX - lastMouseX;
+            const deltaY = event.clientY - lastMouseY;
+            
+            model.rotation.y += deltaX * 0.005; // Sensibilité ajustée, à tester
+            model.rotation.x += deltaY * 0.005; // Sensibilité ajustée, à tester
+            
+            lastMouseX = event.clientX;
+            lastMouseY = event.clientY;
+        }
+    }
+    
+    function onDocumentMouseUp() {
+        isDragging = false;
+    }
+    
+    function onDocumentTouchStart(event) {
+        if (event.touches.length === 1) {
+            event.preventDefault();
+            isDragging = true;
+            
+            lastMouseX = event.touches[0].pageX;
+            lastMouseY = event.touches[0].pageY;
+        }
+    }
+    
+    function onDocumentTouchMove(event) {
+        if (event.touches.length === 1 && isDragging && model) {
+            event.preventDefault();
+            
+            const currentX = event.touches[0].pageX;
+            const currentY = event.touches[0].pageY;
+            
+            const deltaX = currentX - lastMouseX;
+            const deltaY = currentY - lastMouseY;
+            
+            model.rotation.y += deltaX * 0.005; // Sensibilité ajustée, à tester
+            model.rotation.x += deltaY * 0.005; // Sensibilité ajustée, à tester
+            
+            lastMouseX = currentX;
+            lastMouseY = currentY;
+        }
+    }
+    
+    function onDocumentTouchEnd() {
+        isDragging = false;
+    }
+
+    // Initialisation du modèle 3D et logique de finalisation de la mise en page
+    if (canvas && typeof THREE !== 'undefined') {
+        try {
+            init(); // init() contient son propre setTimeout pour onWindowResize
+        } catch (error) {
+            console.error('Erreur lors de l\'initialisation du modèle 3D:', error);
+        }
+    } else if (canvas && typeof THREE === 'undefined') {
+        console.error('THREE.js library not found! 3D model cannot be initialized.');
+    }
+
+    // Tenter de finaliser la mise en page APRÈS l'initialisation potentielle de Three.js
+    // et après que son propre onWindowResize (dans un setTimeout de 50ms) ait eu une chance de s'exécuter.
+    setTimeout(() => {
+        const heroSection = document.querySelector('.hero-section');
+        if (heroSection) {
+            void heroSection.offsetHeight;
+        }
+        // Appeler onWindowResize ici pour s'assurer que le canvas a les bonnes dimensions
+        // après que le reste de la page (y compris hero-section) ait eu une chance de se mettre en page.
+        if (typeof onWindowResize === 'function') {
+            onWindowResize();
+        }
+
+        handleScroll(); // S'assure que le header/vagues sont corrects
+        window.dispatchEvent(new Event('scroll')); // Déclenche les événements de scroll globaux
+    }, 800); // Délai augmenté pour couvrir l'initialisation de Three.js + son onWindowResize
 });
