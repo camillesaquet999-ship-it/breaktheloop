@@ -1,107 +1,55 @@
-// Fichier JavaScript minimal pour le menu mobile
+const NAV_OPEN_CLASS = 'nav-open';
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Créer le menu mobile en JavaScript pour éviter les conflits HTML
-    function createMobileMenu() {
-        // Créer l'élément div du menu
-        const mobileMenu = document.createElement('div');
-        mobileMenu.id = 'mobile-menu';
-        
-        // Créer le bouton de fermeture
-        const closeButton = document.createElement('button');
-        closeButton.className = 'close-menu';
-        closeButton.innerHTML = '&times;';
-        closeButton.setAttribute('aria-label', 'Fermer le menu');
-        
-        // Créer la liste de liens (copie des liens du menu principal)
-        const menuList = document.createElement('ul');
-        const navLinks = document.querySelector('.nav-links');
-        
-        if (navLinks) {
-            // Copier les liens de navigation existants
-            const links = navLinks.querySelectorAll('li');
-            links.forEach(function(link) {
-                const newItem = link.cloneNode(true);
-                menuList.appendChild(newItem);
-            });
-        } else {
-            // Si pas de liens trouvés, créer des liens par défaut
-            const defaultLinks = [
-                { href: "index.html", text: "Accueil" },
-                { href: "#solutions", text: "Solutions" },
-                { href: "actualites.html", text: "Actualités" },
-                { href: "#", text: "Méthode" },
-                { href: "#", text: "Ressources" },
-                { href: "#", text: "Contact" }
-            ];
-            
-            defaultLinks.forEach(function(link) {
-                const item = document.createElement('li');
-                const anchor = document.createElement('a');
-                anchor.href = link.href;
-                anchor.textContent = link.text;
-                item.appendChild(anchor);
-                menuList.appendChild(item);
-            });
-        }
-        
-        // Assembler le menu
-        mobileMenu.appendChild(closeButton);
-        mobileMenu.appendChild(menuList);
-        
-        // Ajouter le menu au body
-        document.body.appendChild(mobileMenu);
-        
-        return mobileMenu;
+document.addEventListener('DOMContentLoaded', () => {
+  const toggleButton = document.querySelector('[data-nav-toggle]');
+  const navList = document.getElementById('primary-nav');
+  const backdrop = document.querySelector('[data-nav-dismiss]');
+  const focusableSelectors = 'a[href], button:not([disabled])';
+  let lastFocusedElement = null;
+
+  if (!toggleButton || !navList) {
+    return;
+  }
+
+  const toggleMenu = (forceOpen) => {
+    const shouldOpen = typeof forceOpen === 'boolean'
+      ? forceOpen
+      : !document.body.classList.contains(NAV_OPEN_CLASS);
+
+    document.body.classList.toggle(NAV_OPEN_CLASS, shouldOpen);
+    toggleButton.setAttribute('aria-expanded', String(shouldOpen));
+
+    if (shouldOpen) {
+      lastFocusedElement = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+      navList.querySelector(focusableSelectors)?.focus();
+    } else if (lastFocusedElement) {
+      lastFocusedElement.focus();
     }
-    
-    // Créer le menu
-    const mobileMenu = createMobileMenu();
-    
-    // Référence au bouton hamburger
-    const hamburgerButton = document.querySelector('.mobile-nav-toggle');
-    const closeButton = document.querySelector('.close-menu');
-    
-    // Fonction pour ouvrir le menu
-    function openMenu() {
-        mobileMenu.classList.add('show');
-        document.body.style.overflow = 'hidden'; // Empêcher le défilement
+  };
+
+  toggleButton.addEventListener('click', () => {
+    toggleMenu();
+  });
+
+  backdrop?.addEventListener('click', () => {
+    toggleMenu(false);
+  });
+
+  navList.addEventListener('click', (event) => {
+    if (event.target instanceof HTMLElement && event.target.matches('a')) {
+      toggleMenu(false);
     }
-    
-    // Fonction pour fermer le menu
-    function closeMenu() {
-        mobileMenu.classList.remove('show');
-        document.body.style.overflow = ''; // Réactiver le défilement
+  });
+
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && document.body.classList.contains(NAV_OPEN_CLASS)) {
+      toggleMenu(false);
     }
-    
-    // Événements pour ouvrir/fermer le menu
-    if (hamburgerButton) {
-        hamburgerButton.addEventListener('click', function(e) {
-            e.preventDefault();
-            openMenu();
-        });
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1024 && document.body.classList.contains(NAV_OPEN_CLASS)) {
+      toggleMenu(false);
     }
-    
-    if (closeButton) {
-        closeButton.addEventListener('click', function() {
-            closeMenu();
-        });
-    }
-    
-    // Fermer le menu si on clique sur un lien
-    const menuLinks = mobileMenu.querySelectorAll('a');
-    menuLinks.forEach(function(link) {
-        link.addEventListener('click', function() {
-            closeMenu();
-        });
-    });
-    
-    // Fermer le menu avec la touche Escape
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && mobileMenu.classList.contains('show')) {
-            closeMenu();
-        }
-    });
-    
-    console.log('Menu mobile simple initialisé avec succès');
+  });
 });

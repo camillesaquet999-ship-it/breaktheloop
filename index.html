@@ -1,148 +1,249 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Break the Loop - Automatisation & IA sur mesure</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/menu.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Break the Loop — Studio IA & Automatisation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 </head>
 <body>
-    <div id="particles-js"></div>
-    <div class="menu-overlay"></div>
-    <div class="container">
-        <header>
-            <nav>
-                <div class="logo">BREAKTHELOOP</div>
-                <button class="mobile-nav-toggle" aria-controls="primary-navigation" aria-expanded="false">
-                    <span class="sr-only">Menu</span>
-                    <span class="hamburger-line line1"></span>
-                    <span class="hamburger-line line2"></span>
-                    <span class="hamburger-line line3"></span>
-                </button>
-                <ul class="nav-links" id="primary-navigation">
-                    <li><a href="#">Accueil</a></li>
-                    <li><a href="#solutions">Solutions</a></li>
-                    <li><a href="actualites.html">Actualités</a></li>
-                    <li><a href="#">Méthode</a></li>
-                    <li><a href="#">Ressources</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </nav>
-        </header>
+  <div class="cursor-glow" aria-hidden="true"></div>
+  <header class="site-header" data-reveal>
+    <nav class="site-nav">
+      <a class="brand" href="#hero" aria-label="Break the Loop">
+        <span>Break</span><span>the Loop</span>
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" data-nav-toggle>
+        <span class="nav-toggle__line"></span>
+        <span class="nav-toggle__line"></span>
+        <span class="nav-toggle__line"></span>
+        <span class="sr-only">Ouvrir le menu</span>
+      </button>
+      <div class="nav-backdrop" data-nav-dismiss></div>
+      <ul class="nav-links" id="primary-nav">
+        <li><a href="#hero">Accueil</a></li>
+        <li><a href="#studio">Présentation</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#methodes">Méthodologie</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a class="nav-link--accent" href="actualites.html">Actualités</a></li>
+      </ul>
+    </nav>
+  </header>
 
-        <main class="hero-section">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1>Break<br>the Loop</h1>
-                    <p>Automatisation & IA sur mesure</p>
-                    <button class="cta-button">Demander un audit</button>
-                </div>
-                <div class="hero-image-container">
-                    <canvas id="ringCanvas"></canvas>
-                </div>
-            </div>
-            <div class="scroll-indicator">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 19L12 5M12 19L7 14M12 19L17 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-        </main>
-
-        <section id="solutions" class="solutions-section">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Nos solutions pour libérer le potentiel de votre entreprise</h2>
-                    <p class="section-subtitle">Des outils concrets, une IA au service de vos besoins métier, et des résultats mesurables dès les premières semaines.</p>
-                </div>
-                
-                <div class="solutions-grid">
-                    <!-- Solution 1 -->
-                    <div class="solution-card solution-blue">
-                        <h3>Automatisation intelligente</h3>
-                        <p class="solution-intro">Libérez vos équipes des tâches répétitives.</p>
-                        <p>Nous mettons en place des agents IA et des scénarios d'automatisation personnalisés pour optimiser les opérations quotidiennes :</p>
-                        <ul>
-                            <li>Gestion d'e-mails entrants et sortants</li>
-                            <li>Classement automatique de documents</li>
-                            <li>Suivi de relances et facturation</li>
-                            <li>Extraction d'informations à la volée</li>
-                        </ul>
-                        <p class="solution-highlight">⏱️ Gain moyen constaté : jusqu'à 40 % de temps économisé sur vos processus récurrents.</p>
-                    </div>
-                    
-                    <!-- Solution 2 -->
-                    <div class="solution-card solution-purple">
-                        <h3>IA sur mesure</h3>
-                        <p class="solution-intro">Votre entreprise est unique. Vos IA aussi.</p>
-                        <p>Nous concevons et déployons des modèles sur mesure, capables de traiter vos cas métier spécifiques :</p>
-                        <ul>
-                            <li>Intégration d'API IA (GPT, Claude, LLaMA…)</li>
-                            <li>Analyse prédictive de données internes</li>
-                            <li>Génération automatisée de contenus métiers</li>
-                            <li>Scoring, classification ou routage intelligent</li>
-                        </ul>
-                        <p class="solution-highlight">🧩 Notre approche : s'appuyer sur votre écosystème (CRM, ERP, e-mails, fichiers) sans le bouleverser.</p>
-                    </div>
-                    
-                    <!-- Solution 3 -->
-                    <div class="solution-card solution-blue">
-                        <h3>Audit IA & sécurité</h3>
-                        <p class="solution-intro">Vos IA actuelles sont-elles sûres ?</p>
-                        <p>Nous réalisons des audits complets pour détecter les failles d'usage, les risques de fuite de données ou les dérives non maîtrisées :</p>
-                        <ul>
-                            <li>Test de jailbreak (prompt injection)</li>
-                            <li>Évaluation des permissions implicites</li>
-                            <li>Vérification de la conformité RGPD</li>
-                            <li>Rédaction de recommandations correctives</li>
-                        </ul>
-                        <p class="solution-highlight">🔍 Rapport détaillé livré en PDF + suivi post-audit inclus.</p>
-                    </div>
-                    
-                    <!-- Solution 4 -->
-                    <div class="solution-card solution-purple">
-                        <h3>Formations & adoption</h3>
-                        <p class="solution-intro">Pas d'impact sans adoption.</p>
-                        <p>Nous accompagnons vos équipes dans la prise en main des outils IA avec des sessions ciblées :</p>
-                        <ul>
-                            <li>Formations "Prompt Engineering"</li>
-                            <li>Ateliers IA + métier (marketing, juridique, RH…)</li>
-                            <li>Bootcamp automatisation (Make, n8n, Power Automate…)</li>
-                        </ul>
-                        <p class="solution-highlight">🎓 Des parcours adaptables, en distanciel ou présentiel, en fonction de vos outils internes.</p>
-                    </div>
-                </div>
-                
-                <div class="cta-container">
-                    <p class="cta-text">➡️ Vous ne savez pas par où commencer ?</p>
-                    <button class="cta-button">Contactez-nous pour un audit rapide et gratuit</button>
-                </div>
-            </div>
-        </section>
-    </div>
-    
-    <div id="wave-wrapper">
-        <div class="wave-container">
-            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-                <defs>
-                    <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-                </defs>
-                <g class="parallax">
-                    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(106, 13, 173, 0.5)" />
-                    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(130, 219, 255, 0.4)" />
-                    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(82, 109, 255, 0.2)" />
-                    <use xlink:href="#gentle-wave" x="48" y="7" fill="rgba(106, 13, 173, 0.3)" />
-                </g>
-            </svg>
+  <main>
+    <section class="hero" id="hero">
+      <canvas id="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero__overlay">
+        <p class="hero__eyebrow" data-reveal>Studio IA immersif</p>
+        <h1 class="hero__title" data-reveal>Entrez au cœur de l’automatisation comme dans un film.</h1>
+        <p class="hero__subtitle" data-reveal>
+          Une expérience d’accueil cinématique inspirée d’une vue drone qui plonge vos visiteurs au centre de votre univers numérique.
+          Nous orchestrons vos flux métiers, vos agents IA et vos données avec une précision de studio.
+        </p>
+        <div class="hero__actions" data-reveal>
+          <a class="btn btn--primary" href="#contact">Planifier une démo immersive</a>
+          <a class="btn btn--ghost" href="#services">Explorer nos services</a>
         </div>
-    </div>
+      </div>
+      <div class="scroll-hint" data-reveal>
+        <span>Scrollez pour explorer</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14m0 0l-5-5m5 5 5-5"/></svg>
+      </div>
+    </section>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="js/menu.js"></script>
-    <script src="js/script.js"></script>
+    <section class="intro" id="studio">
+      <div class="section-shell">
+        <div class="intro__badge" data-reveal>Présentation</div>
+        <div class="intro__grid">
+          <div class="intro__content" data-reveal>
+            <h2>Nous concevons des expériences digitales à la pointe pour les équipes qui veulent garder un temps d’avance.</h2>
+            <p>
+              Break the Loop est un studio d’ingénierie créative spécialisé dans l’automatisation haut de gamme et l’intelligence artificielle sur mesure.
+              Nous associons direction artistique, architecture logicielle et design d’interactions immersif pour rendre vos processus aussi fluides qu’un travelling de cinéma.
+            </p>
+          </div>
+          <div class="intro__stats" data-reveal>
+            <article class="stat-card" data-tilt data-tilt-glare data-tilt-max="9" data-tilt-speed="600" data-tilt-gyroscope>
+              <p class="stat-card__label">Projets livrés</p>
+              <p class="stat-card__value">+120</p>
+              <p class="stat-card__meta">Automatisations full-stack et IA propriétaires</p>
+            </article>
+            <article class="stat-card" data-tilt data-tilt-glare data-tilt-max="9" data-tilt-speed="600" data-tilt-gyroscope>
+              <p class="stat-card__label">Accélération moyenne</p>
+              <p class="stat-card__value">x6</p>
+              <p class="stat-card__meta">Du cycle décision → action pour les équipes opérations</p>
+            </article>
+            <article class="stat-card" data-tilt data-tilt-glare data-tilt-max="9" data-tilt-speed="600" data-tilt-gyroscope>
+              <p class="stat-card__label">Disponibilité</p>
+              <p class="stat-card__value">24/7</p>
+              <p class="stat-card__meta">Monitoring, MLOps et support proactif sur toutes vos stacks</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="services" id="services">
+      <div class="section-shell">
+        <div class="section-header" data-reveal>
+          <p class="section-header__eyebrow">Services signature</p>
+          <h2>Chaque scrolling déclenche un nouveau chapitre immersif.</h2>
+          <p>Des parallaxes cinématiques, des modules 3D et une interaction gyroscopique pour présenter vos offres comme une bande démo.</p>
+        </div>
+      </div>
+
+      <div class="service-block" data-parallax="0.22">
+        <div class="service-media" data-parallax-target>
+          <div class="service-media__frame">
+            <span class="service-media__beam"></span>
+            <span class="service-media__beam"></span>
+            <span class="service-media__beam"></span>
+          </div>
+          <div class="service-media__sphere"></div>
+        </div>
+        <div class="service-copy" data-reveal>
+          <p class="service-copy__kicker">Service 01</p>
+          <h3>Onboarding cinématique & tunnel de vente interactif</h3>
+          <p>Nous créons votre scène d’introduction avec une profondeur 3D temps réel, une navigation pilotée au gyroscope et des hotspots qui suivent le mouvement de la souris.</p>
+          <ul>
+            <li>Canvas WebGL piloté par Three.js & shader personnalisé</li>
+            <li>Effets parallaxe multi-couches pour desktop et mobile</li>
+            <li>Transitions micro-interactives sur les CTA, hover et scroll</li>
+          </ul>
+          <a class="text-link" href="#contact">Imaginer l’expérience</a>
+        </div>
+      </div>
+
+      <div class="service-block service-block--reverse" data-parallax="0.18">
+        <div class="service-media" data-parallax-target>
+          <div class="service-media__grid" aria-hidden="true">
+            <div></div><div></div><div></div><div></div>
+            <div></div><div></div><div></div><div></div>
+            <div></div><div></div><div></div><div></div>
+            <div></div><div></div><div></div><div></div>
+          </div>
+        </div>
+        <div class="service-copy" data-reveal>
+          <p class="service-copy__kicker">Service 02</p>
+          <h3>Architectures IA orchestrées par agents autonomes</h3>
+          <p>Nous assemblons vos briques IA en scénarios orchestrés : assistants conversationnels, copilotes métiers et chaînes d’automatisation low-code.</p>
+          <ul>
+            <li>Design system conversationnel + monitoring en temps réel</li>
+            <li>Connecteurs CRM/ERP, RPA et bases de connaissances unifiées</li>
+            <li>Gouvernance sécurité, red teaming IA et observabilité MLOps</li>
+          </ul>
+          <a class="text-link" href="#methodes">Découvrir la méthode</a>
+        </div>
+      </div>
+
+      <div class="service-block" data-parallax="0.2">
+        <div class="service-media" data-parallax-target>
+          <div class="service-media__pulse" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+        <div class="service-copy" data-reveal>
+          <p class="service-copy__kicker">Service 03</p>
+          <h3>Dashboards immersifs & pilotage temps réel</h3>
+          <p>Vos données deviennent un cockpit interactif : caméras dynamiques, cartes 3D, et commandes glissées-déposées qui répondent à chaque mouvement.</p>
+          <ul>
+            <li>Parcours WebGL/GIS synchronisés aux données métiers</li>
+            <li>Commandes gestuelles (pointer, tap, drag) multi-appareils</li>
+            <li>Animation et feedback auditif pour une lecture intuitive</li>
+          </ul>
+          <a class="text-link" href="#contact">Construire mon cockpit</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="method" id="methodes">
+      <div class="section-shell">
+        <div class="section-header" data-reveal>
+          <p class="section-header__eyebrow">Notre approche</p>
+          <h2>Une feuille de route digne d’un storyboard.</h2>
+          <p>Nous mixons design thinking, automatisation et IA générative pour capturer l’essence de votre marque et délivrer vite.</p>
+        </div>
+        <div class="method__timeline">
+          <article class="timeline-step" data-reveal>
+            <h3>01 · Scénarisation</h3>
+            <p>Exploration collaborative, mapping de parcours utilisateurs, storyboard d’interactions et moodboard immersif.</p>
+          </article>
+          <article class="timeline-step" data-reveal>
+            <h3>02 · Prototype vivant</h3>
+            <p>Assemblage des maquettes Figma, prototypes WebGL, intégrations API et premiers flux d’automatisation.</p>
+          </article>
+          <article class="timeline-step" data-reveal>
+            <h3>03 · Déploiement & monitoring</h3>
+            <p>Mise en production progressive, instrumentation MLOps, simulation de charges et hypervision continue.</p>
+          </article>
+          <article class="timeline-step" data-reveal>
+            <h3>04 · Croissance assistée</h3>
+            <p>Optimisations data-driven, tests A/B immersifs, training utilisateurs et support 24/7 par nos experts.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contact">
+      <div class="section-shell">
+        <div class="cta__panel" data-reveal data-tilt data-tilt-max="6" data-tilt-speed="400" data-tilt-perspective="1800" data-tilt-gyroscope>
+          <div>
+            <p class="cta__eyebrow">Parlons vision</p>
+            <h2>Prêt à accueillir vos visiteurs dans une expérience grand spectacle&nbsp;?</h2>
+            <p>Planifions une session de 45 minutes pour aligner vos enjeux business, votre narration et les technologies immersives qui feront la différence.</p>
+          </div>
+          <form class="cta__form" aria-label="Demande de session découverte">
+            <label>
+              <span>Nom & prénom</span>
+              <input type="text" name="name" placeholder="Alex Martin" required>
+            </label>
+            <label>
+              <span>Email professionnel</span>
+              <input type="email" name="email" placeholder="alex@entreprise.com" required>
+            </label>
+            <label>
+              <span>Projet à transformer</span>
+              <textarea name="project" rows="3" placeholder="Expliquez-nous votre ambition immersive"></textarea>
+            </label>
+            <button type="submit" class="btn btn--primary">Réserver un créneau</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="section-shell">
+      <div class="footer__grid">
+        <div>
+          <a class="brand brand--small" href="#hero">Break the Loop</a>
+          <p>Studio d’automatisation & IA immersive — Paris · Montréal · Remote first.</p>
+        </div>
+        <div class="footer__links">
+          <a href="#services">Services</a>
+          <a href="#methodes">Méthodologie</a>
+          <a href="actualites.html">Actualités</a>
+        </div>
+        <div class="footer__cta">
+          <p>Suivre notre veille</p>
+          <a class="text-link" href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="text-link" href="mailto:contact@breaktheloop.io">contact@breaktheloop.io</a>
+        </div>
+      </div>
+      <p class="footer__legal">© <span id="current-year">2025</span> Break the Loop. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.159.0/three.min.js" integrity="sha512-uF2p6FGLwUdqMXiB4koD1k8tqjT2o0vf87DZ4jqqIZMzAqFH3Rfu9x2gLy3IhA3RP9FZrMOz2OuUMR8Fs5M8hA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js" integrity="sha256-vMRHkRkNvztNFVQVw1Gc7YCOUMIqFZ3VAbwYSEuxsks=" crossorigin="anonymous"></script>
+  <script src="js/menu.js"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>
