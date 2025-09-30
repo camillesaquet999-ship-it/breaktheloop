@@ -10,45 +10,45 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="particles-js"></div>
-    <div class="menu-overlay"></div>
+    <div id="particles-js" aria-hidden="true"></div>
+    <div class="menu-overlay" data-menu-overlay></div>
     <div class="container">
         <header>
             <nav>
                 <div class="logo">BREAKTHELOOP</div>
                 <button class="mobile-nav-toggle" aria-controls="primary-navigation" aria-expanded="false">
-                    <span class="sr-only">Menu</span>
+                    <span class="sr-only">Ouvrir le menu</span>
                     <span class="hamburger-line line1"></span>
                     <span class="hamburger-line line2"></span>
                     <span class="hamburger-line line3"></span>
                 </button>
-                <ul class="nav-links" id="primary-navigation">
-                    <li><a href="#">Accueil</a></li>
+                <ul class="nav-links" id="primary-navigation" data-visible="false">
+                    <li><a href="#hero">Accueil</a></li>
                     <li><a href="#solutions">Solutions</a></li>
                     <li><a href="actualites.html">Actualités</a></li>
-                    <li><a href="#">Méthode</a></li>
-                    <li><a href="#">Ressources</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="#methodologie">Méthode</a></li>
+                    <li><a href="#ressources">Ressources</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
         </header>
 
-        <main class="hero-section">
+        <main class="hero-section" id="hero">
             <div class="hero-content">
                 <div class="hero-text">
                     <h1>Break<br>the Loop</h1>
-                    <p>Automatisation & IA sur mesure</p>
-                    <button class="cta-button">Demander un audit</button>
+                    <p>Automatisation &amp; IA sur mesure</p>
+                    <a class="cta-button" href="#contact">Demander un audit</a>
                 </div>
                 <div class="hero-image-container">
-                    <canvas id="ringCanvas"></canvas>
+                    <canvas id="ringCanvas" aria-hidden="true"></canvas>
                 </div>
             </div>
-            <div class="scroll-indicator">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <button class="scroll-indicator" type="button" aria-label="Découvrir nos solutions">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path d="M12 19L12 5M12 19L7 14M12 19L17 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-            </div>
+            </button>
         </main>
 
         <section id="solutions" class="solutions-section">
@@ -57,9 +57,8 @@
                     <h2>Nos solutions pour libérer le potentiel de votre entreprise</h2>
                     <p class="section-subtitle">Des outils concrets, une IA au service de vos besoins métier, et des résultats mesurables dès les premières semaines.</p>
                 </div>
-                
+
                 <div class="solutions-grid">
-                    <!-- Solution 1 -->
                     <div class="solution-card solution-blue">
                         <h3>Automatisation intelligente</h3>
                         <p class="solution-intro">Libérez vos équipes des tâches répétitives.</p>
@@ -70,10 +69,9 @@
                             <li>Suivi de relances et facturation</li>
                             <li>Extraction d'informations à la volée</li>
                         </ul>
-                        <p class="solution-highlight">⏱️ Gain moyen constaté : jusqu'à 40 % de temps économisé sur vos processus récurrents.</p>
+                        <p class="solution-highlight">⏱️ Gain moyen constaté : jusqu'à 40&nbsp;% de temps économisé sur vos processus récurrents.</p>
                     </div>
-                    
-                    <!-- Solution 2 -->
+
                     <div class="solution-card solution-purple">
                         <h3>IA sur mesure</h3>
                         <p class="solution-intro">Votre entreprise est unique. Vos IA aussi.</p>
@@ -86,10 +84,9 @@
                         </ul>
                         <p class="solution-highlight">🧩 Notre approche : s'appuyer sur votre écosystème (CRM, ERP, e-mails, fichiers) sans le bouleverser.</p>
                     </div>
-                    
-                    <!-- Solution 3 -->
+
                     <div class="solution-card solution-blue">
-                        <h3>Audit IA & sécurité</h3>
+                        <h3>Audit IA &amp; sécurité</h3>
                         <p class="solution-intro">Vos IA actuelles sont-elles sûres ?</p>
                         <p>Nous réalisons des audits complets pour détecter les failles d'usage, les risques de fuite de données ou les dérives non maîtrisées :</p>
                         <ul>
@@ -100,10 +97,9 @@
                         </ul>
                         <p class="solution-highlight">🔍 Rapport détaillé livré en PDF + suivi post-audit inclus.</p>
                     </div>
-                    
-                    <!-- Solution 4 -->
+
                     <div class="solution-card solution-purple">
-                        <h3>Formations & adoption</h3>
+                        <h3>Formations &amp; adoption</h3>
                         <p class="solution-intro">Pas d'impact sans adoption.</p>
                         <p>Nous accompagnons vos équipes dans la prise en main des outils IA avec des sessions ciblées :</p>
                         <ul>
@@ -114,16 +110,110 @@
                         <p class="solution-highlight">🎓 Des parcours adaptables, en distanciel ou présentiel, en fonction de vos outils internes.</p>
                     </div>
                 </div>
-                
+
                 <div class="cta-container">
                     <p class="cta-text">➡️ Vous ne savez pas par où commencer ?</p>
-                    <button class="cta-button">Contactez-nous pour un audit rapide et gratuit</button>
+                    <a class="cta-button" href="#contact">Contactez-nous pour un audit rapide et gratuit</a>
                 </div>
             </div>
         </section>
+
+        <section id="methodologie" class="method-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Notre méthodologie, de l'audit au déploiement</h2>
+                    <p class="section-subtitle">Une feuille de route claire pour sécuriser l'intégration de l'IA et de l'automatisation dans votre organisation.</p>
+                </div>
+                <div class="method-grid">
+                    <article class="method-step">
+                        <span class="step-number">01</span>
+                        <h3>Audit &amp; cadrage</h3>
+                        <p>Cartographie de vos processus, identification des opportunités IA/automatisation et définition des indicateurs de succès.</p>
+                    </article>
+                    <article class="method-step">
+                        <span class="step-number">02</span>
+                        <h3>Design d'expérience</h3>
+                        <p>Conception de parcours utilisateurs, rédaction des prompts clés et sélection des outils les plus adaptés à votre stack.</p>
+                    </article>
+                    <article class="method-step">
+                        <span class="step-number">03</span>
+                        <h3>Déploiement &amp; intégration</h3>
+                        <p>Implémentation technique, tests de sécurité et connexion à vos CRM, ERP, bases de données ou outils métiers.</p>
+                    </article>
+                    <article class="method-step">
+                        <span class="step-number">04</span>
+                        <h3>Formation &amp; adoption</h3>
+                        <p>Coaching des équipes, documentation dédiée et plan d’amélioration continue pour garantir une adoption durable.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="ressources" class="resources-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Ressources &amp; veille stratégique</h2>
+                    <p class="section-subtitle">Restez à jour sur les usages concrets de l’IA et les retours d’expérience de notre équipe.</p>
+                </div>
+                <div class="resources-grid">
+                    <article class="resource-card">
+                        <h3>Bulletin d’actualités IA</h3>
+                        <p>Une synthèse hebdomadaire des annonces des leaders du secteur, des outils émergents et des benchmarks de performances.</p>
+                        <a class="text-link" href="actualites.html">Consulter la dernière édition</a>
+                    </article>
+                    <article class="resource-card">
+                        <h3>Guides d’automatisation</h3>
+                        <p>Des modèles de workflows prêts à l’emploi pour accélérer la gestion des leads, la relation client ou la production de contenus.</p>
+                        <a class="text-link" href="#contact">Recevoir les guides personnalisés</a>
+                    </article>
+                    <article class="resource-card">
+                        <h3>Sessions de démonstration</h3>
+                        <p>Une immersion de 30 minutes pour visualiser un cas d’usage proche de votre contexte et identifier les gains rapides.</p>
+                        <a class="text-link" href="#contact">Planifier une démonstration</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container contact-grid">
+                <div class="contact-intro">
+                    <h2>Parlons de votre prochain projet</h2>
+                    <p>Décrivez-nous vos objectifs : nous revenons vers vous sous 24&nbsp;heures ouvrées avec une proposition d’accompagnement sur mesure.</p>
+                    <div class="contact-details">
+                        <a class="contact-link" href="mailto:contact@breaktheloop.fr">contact@breaktheloop.fr</a>
+                        <a class="contact-link" href="tel:+33184000000">+33&nbsp;1&nbsp;84&nbsp;00&nbsp;00&nbsp;00</a>
+                    </div>
+                    <div class="contact-cta">
+                        <a class="cta-button" href="mailto:contact@breaktheloop.fr">Écrire à l’équipe</a>
+                        <a class="cta-button secondary" href="https://cal.com/" target="_blank" rel="noopener">Réserver une visio</a>
+                    </div>
+                </div>
+                <form class="contact-form" aria-label="Formulaire de prise de contact" action="mailto:contact@breaktheloop.fr" method="post">
+                    <div class="form-group">
+                        <label for="fullname">Nom et prénom</label>
+                        <input type="text" id="fullname" name="fullname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Adresse e-mail professionnelle</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Entreprise</label>
+                        <input type="text" id="company" name="company">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Votre besoin</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Expliquez vos objectifs ou les processus à automatiser"></textarea>
+                    </div>
+                    <button type="submit" class="cta-button full">Envoyer ma demande</button>
+                    <p class="form-footnote">En cliquant sur «&nbsp;Envoyer&nbsp;», vous acceptez que Break the Loop vous recontacte au sujet de votre demande.</p>
+                </form>
+            </div>
+        </section>
     </div>
-    
-    <div id="wave-wrapper">
+
+    <div id="wave-wrapper" aria-hidden="true">
         <div class="wave-container">
             <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
                 <defs>
@@ -138,6 +228,25 @@
             </svg>
         </div>
     </div>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <span class="logo">BREAKTHELOOP</span>
+                <p>Studio spécialisé en automatisation et intelligence artificielle sur mesure.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#hero">Accueil</a>
+                <a href="#solutions">Solutions</a>
+                <a href="actualites.html">Actualités</a>
+                <a href="#methodologie">Méthode</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-meta">
+                <p>&copy; 2025 Break the Loop. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>

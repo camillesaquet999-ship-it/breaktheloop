@@ -127,12 +127,10 @@ function handleScroll() {
         if (scrollPosition > 50) { // Ajustement du seuil de disparition
             if (!waveWrapper.classList.contains('hidden')) {
                 waveWrapper.classList.add('hidden');
-                // console.log('Vagues masquées - position de défilement:', scrollPosition);
             }
         } else {
             if (waveWrapper.classList.contains('hidden')) {
                 waveWrapper.classList.remove('hidden');
-                // console.log('Vagues affichées - position de défilement:', scrollPosition);
             }
         }
     }
@@ -240,9 +238,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 scene.add(model);
                 animate(); // Start animation loop only after model is loaded
-            },
-            function (xhr) {
-                console.log((xhr.loaded / xhr.total * 100) + '% loaded');
             },
             function (error) {
                 console.error('An error happened loading the GLTF model:', error);
@@ -361,25 +356,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Initialisation du modèle 3D et logique de finalisation de la mise en page
-    console.log('Tentative d\'initialisation du canvas 3D...');
-    console.log('Canvas exists:', !!canvas);
-    console.log('THREE exists:', typeof THREE !== 'undefined');
-    
-    if (canvas && typeof THREE !== 'undefined') { 
-        console.log('Initialisation du modèle 3D...');
+    if (canvas && typeof THREE !== 'undefined') {
         try {
             init(); // init() contient son propre setTimeout pour onWindowResize
-            console.log('Initialisation réussie!');
         } catch (error) {
             console.error('Erreur lors de l\'initialisation du modèle 3D:', error);
         }
-    } else {
-        if (!canvas) {
-            console.error('Canvas element #ringCanvas not found! 3D model cannot be initialized.');
-        }
-        if (typeof THREE === 'undefined') {
-            console.error('THREE.js library not found! 3D model cannot be initialized.');
-        }
+    } else if (canvas && typeof THREE === 'undefined') {
+        console.error('THREE.js library not found! 3D model cannot be initialized.');
     }
 
     // Tenter de finaliser la mise en page APRÈS l'initialisation potentielle de Three.js
@@ -387,18 +371,15 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         const heroSection = document.querySelector('.hero-section');
         if (heroSection) {
-            void heroSection.offsetHeight; 
-            // console.log("Hero section reflow triggered post Three.js init attempt.");
+            void heroSection.offsetHeight;
         }
         // Appeler onWindowResize ici pour s'assurer que le canvas a les bonnes dimensions
         // après que le reste de la page (y compris hero-section) ait eu une chance de se mettre en page.
         if (typeof onWindowResize === 'function') {
             onWindowResize();
-            // console.log("onWindowResize called from final setTimeout");
         }
 
         handleScroll(); // S'assure que le header/vagues sont corrects
         window.dispatchEvent(new Event('scroll')); // Déclenche les événements de scroll globaux
-        // console.log("Initial scroll event dispatched post Three.js init attempt.");
     }, 800); // Délai augmenté pour couvrir l'initialisation de Three.js + son onWindowResize
 });
